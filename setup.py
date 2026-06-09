@@ -5,7 +5,8 @@ setuptools.setup(
     version = '0.0.0',
     install_requires = [
         'hy >= 1',
-        'thoughtforms @ git+https://github.com/Kodiologist/ThoughtForms.git#a6ae5c822040a0c72a5d8202d843e680a21ba5a2'],
+        'thoughtforms @ git+https://github.com/Kodiologist/ThoughtForms.git#cf79148af472c42433c956352ecda1f9a015e816',
+        'metadict'],
     packages = setuptools.find_packages(),
     package_data = dict(smoke_task = [
         'consent', 'prolific.hy', 'task.hy']))

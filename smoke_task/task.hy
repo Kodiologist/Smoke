@@ -1,7 +1,10 @@
+(require
+  hyrule [pun])
 (import
   thoughtforms
   thoughtforms.task [FREE-RESPONSE]
-  thoughtforms.html [E RawHTML])
+  thoughtforms.html [E RawHTML]
+  metadict [MetaDict])
 (setv  T True  F False)
 
 ;; * Task definition
@@ -57,6 +60,19 @@
     "Now for some similar questions, but instead of thinking about yourself, imagine a random other user of Prolific who's taking this survey. How hard would it be for this person to quit?"
     "Suppose another person overindulged in this thing, and they wanted to quit. How hard do you think it would be?"
     (quit-difficulty "them"))
+
+  ; Get the first vice with the greatest self-optimism.
+  (setv top (max :key :optimism
+    (lfor
+      vice vices
+      :setv me (.dval task f"difficulty_self_{vice}")
+      :setv them (.dval task f"difficulty_other_{vice}")
+      (pun (MetaDict :!vice :!me :!them :optimism (- them me))))))
+  (.setd task "optimistic-vice" top.vice)
+  (when (> top.optimism 0)
+    (page 'textbox "optimism-reason" [
+      (E.p :class "vice" (get vices top.vice))
+      (E.p f"You said that the above thing would be {(hy.repr (get (quit-difficulty "me") top.me))} but {(hy.repr (get (quit-difficulty "them") top.them))}. Briefly, why do you think it would be easier for you to quit this thing than for the random other person?")]))
 
   (page 'textbox "comments"
      (E.p
