@@ -7,5 +7,5 @@ setuptools.setup(
         'hy >= 1',
         'thoughtforms @ git+https://github.com/Kodiologist/ThoughtForms.git#a6ae5c822040a0c72a5d8202d843e680a21ba5a2'],
     packages = setuptools.find_packages(),
-    package_data = dict(incompat_task = [
+    package_data = dict(smoke_task = [
         'consent', 'prolific.hy', 'task.hy']))
