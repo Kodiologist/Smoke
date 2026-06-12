@@ -51,14 +51,14 @@
 
   (subtask
     "difficulty_self"
-    "Now for each of the same things, imagine you indulged in it a lot, and you wanted to cut back or quit. How hard do you think it would be to quit? Give me your best guess."
-    "Suppose you overindulged in this thing, and you wanted to quit. How hard do you think it would be?"
+    (RawHTML "Now for each of the same things, imagine you've indulged in it a <strong>lot</strong> on many occasions over a long time, like months or years. Also, imagine you knew that you had a problem, and you wanted to cut back or quit. How hard do you think it would be to quit? Give me your best guess.")
+    "Suppose you overindulged in this thing, repeatedly over a long time, and you wanted to quit. How hard do you think it would be?"
     (quit-difficulty "me"))
 
   (subtask
     "difficulty_other"
     "Now for some similar questions, but instead of thinking about yourself, imagine a random other user of Prolific who's taking this survey. How hard would it be for this person to quit?"
-    "Suppose another person overindulged in this thing, and they wanted to quit. How hard do you think it would be?"
+    "Suppose another person overindulged in this thing, repeatedly over a long time, and they wanted to quit. How hard do you think it would be?"
     (quit-difficulty "them"))
 
   ; Get the first vice with the greatest self-optimism.
