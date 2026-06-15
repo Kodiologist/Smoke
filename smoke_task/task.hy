@@ -1,6 +1,7 @@
 (require
   hyrule [pun])
 (import
+  statistics [median]
   thoughtforms
   thoughtforms.task [FREE-RESPONSE]
   thoughtforms.html [E RawHTML]
@@ -21,7 +22,7 @@
   :computer "Internet or computer use (like social media or video games)"
   :shopping "buying or collecting things"))
 
-(defn quit-difficulty [person]
+(defn quit-difficulty [[person "someone"]]
   {
     1 f"Very easy for {person} to quit"
     2 f"Easy for {person} to quit"
@@ -60,6 +61,12 @@
     "Now for some similar questions, but instead of thinking about yourself, imagine a random other user of Prolific who's taking this survey. How hard would it be for this person to quit?"
     "Suppose another person overindulged in this thing, repeatedly over a long time, and they wanted to quit. How hard do you think it would be?"
     (quit-difficulty "them"))
+
+  (when (<
+      (.dval task "difficulty_self_nicotine")
+      (median (.keys (quit-difficulty))))
+    (page 'textbox "easy-nicotine-reason" [
+      (E.p f"You said that nicotine would be {(hy.repr (get (quit-difficulty "me") (.dval task "difficulty_self_nicotine")))}. But nicotine is famously addictive, with experts rating it among the most addictive drugs. Briefly, why do you think it would be unusually easy for you to quit?")]))
 
   ; Get the first vice with the greatest self-optimism.
   (setv top (max :key :optimism
